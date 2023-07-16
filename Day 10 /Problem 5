@@ -1,0 +1,33 @@
+Rat in a Maze
+
+
+class Solution{
+    public:
+    void solve(int row,int col,vector<vector<int>> &inp, string op, vector<string>&ans, int n) {
+        if(row == n-1 && col == n-1) {
+            ans.push_back(op);
+            return;
+        }
+        
+        if(row < 0 || col < 0 || row>=n || col>=n || inp[row][col] == 0 ) return;
+        
+        inp[row][col] = 0;
+        solve(row,col+1,inp,op+"R",ans,n);
+        solve(row,col-1,inp,op+"L",ans,n);
+        solve(row+1,col,inp,op+"D",ans,n);
+        solve(row-1,col,inp,op+"U",ans,n);
+        inp[row][col] = 1;
+        op.pop_back();
+    }
+    vector<string> findPath(vector<vector<int>> &m, int n) {
+        // Your code goes here
+        vector<string>ans;
+        string op = "";
+        int row = m.size(), col = m[0].size();
+        if(m[0][0] == 0 || m[row-1][col - 1] == 0) return ans;
+        
+        solve(0,0,m,op,ans,n);
+        
+        return ans;
+    }
+};
