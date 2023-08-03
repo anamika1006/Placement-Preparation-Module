@@ -1,0 +1,55 @@
+ Problem 4: Median of Two Sorted Arrays
+
+class Solution {
+public:
+    double findMedianSortedArrays(vector<int>& arr1, vector<int>& arr2) {
+        int n=arr1.size();
+        int m= arr2.size();
+        int arr[n+m];
+        int left=n-1;
+        int right=0;
+        double ans=0.0;
+        while(left>=0 && right<m)
+        {
+            if(arr2[right]<arr1[left])
+            {
+                swap(arr2[right],arr1[left]);
+                right++;
+                left--;
+            }
+            else
+            {
+                break;
+            }
+        }
+        sort(arr1.begin(),arr1.end());
+        sort(arr2.begin(),arr2.end());
+
+       int k=0;
+        for(int i=0;i<n;i++)
+        {
+            arr[i]=arr1[i];
+            k++;
+        }
+        for(int i=0;i<m;i++)
+        {
+            arr[k]=arr2[i];
+            k++;
+        }
+
+        
+        for(int j=0;j<n+m;j++)
+        {
+            cout<<arr[j];
+        }
+
+         int mid = (n+m)/2;
+        if((n+m)%2==0){
+            ans= (arr[mid] + arr[mid-1])/2.0;
+        }
+        else{
+            ans= arr[mid];
+        }
+        return ans;
+    }
+};
