@@ -1,0 +1,18 @@
+Problem 1:Matrix Median
+
+int Solution::findMedian(vector<vector<int> > &mat) {
+int m = mat.size();
+int n = mat[0].size();
+vector<int> res;
+for(int i = 0;i<m;i++){
+for(int j=0;j<n;j++){
+res.push_back(mat[i][j]);
+}
+}
+sort(res.begin(),res.end());
+int tot = res.size();
+if(tot % 2 !=0){
+return res[tot/2];
+}
+return (res[tot/2] + res[(tot/2)+1])/2;
+}
